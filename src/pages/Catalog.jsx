@@ -34,7 +34,7 @@ function Catalog() {
         <main>
 
             <div className = "catalog-header">
-                <h1>Find your perfect pair</h1>
+                <h1>Find your next running pair</h1>
                 <p>Explore our shoes</p>
             </div>
 
