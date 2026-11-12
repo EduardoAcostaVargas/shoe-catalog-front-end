@@ -41,8 +41,8 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Docker image
-        run: docker build -t ghcr.io/EduardoAcostaVargas/stride-frontend:latest .
+        run: docker build -t ghcr.io/eduardoacostavargas/stride-frontend:latest .
       
       - name: Push Docker image
         if: github.event_name == 'push'
-        run: docker push ghcr.io/EduardoAcostaVargas/stride-frontend:latest
+        run: docker push ghcr.io/eduardoacostavargas/stride-frontend:latest
