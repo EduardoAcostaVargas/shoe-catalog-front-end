@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [Eduardo_mobile_app_layout_branch]
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -28,5 +32,17 @@ jobs:
       - name: Build React application
         run: npm run build
 
+      - name: Login in GitHub Container Registry
+        if: github.event_name == 'push'
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build Docker image
-        run: docker build -t shoe-catalog-frontend:latest .
+        run: docker build -t ghcr.io/EduardoAcostaVargas/stride-frontend:latest .
+      
+      - name: Push Docker image
+        if: github.event_name == 'push'
+        run: docker push ghcr.io/EduardoAcostaVargas/stride-frontend:latest
